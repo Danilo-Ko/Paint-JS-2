@@ -1,3 +1,6 @@
+const fileInput = document.getElementById("image-insert");
+const eraser = document.getElementById("eraser-mode");
+const reset = document.getElementById("reset-mode");
 const mode = document.getElementById("mode-change");
 const colorOption =Array.from(document.getElementsByClassName("color-option"));
 const colorPicker = document.getElementById("color");
@@ -47,10 +50,10 @@ function onColorOption (e) {
 function onModeChange () {
     if(isFilling) {
         isFilling = false;
-        mode.innerText = "Draw";
+        mode.innerText = "그리기";
     }else {
         isFilling = true;
-        mode.innerText = "Fill";
+        mode.innerText = "채우기";
     }
 }
 function onFillDraw () {
@@ -58,7 +61,23 @@ function onFillDraw () {
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 }
-
+function onResetCanvas () {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+function onEraser () {
+    ctx.strokeStyle = "white";
+}
+function onFileChange(e) {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = url;
+    image.onload = function () {
+        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        fileInput.value = null;
+    };
+}
 canvas.addEventListener ("mousemove", onMove);
 canvas.addEventListener ("mousedown", startDraw);
 canvas.addEventListener ("click", onFillDraw);
@@ -70,3 +89,6 @@ colorPicker.addEventListener ("change", onColorPicker);
 
 colorOption.forEach((color) => color.addEventListener("click", onColorOption));
 mode.addEventListener ("click", onModeChange);
+reset.addEventListener ("click", onResetCanvas);
+eraser.addEventListener ("click", onEraser);
+fileInput.addEventListener ("change", onFileChange);

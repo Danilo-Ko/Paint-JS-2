@@ -98,48 +98,56 @@
 // canvas.addEventListener("mousemove", onclick);
 // canvas.addEventListener("click", cursor_move);
 
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
+// const canvas = document.querySelector('canvas');
+// const ctx = canvas.getContext('2d');
 
-const CANVAS_SIZE = innerWidth * 0.4;
+// const CANVAS_SIZE = innerWidth * 0.4;
 
-canvas.width = CANVAS_SIZE;
-canvas.height = CANVAS_SIZE;
+// canvas.width = CANVAS_SIZE;
+// canvas.height = CANVAS_SIZE;
 
-ctx.lineWidth = 2;
+// ctx.lineWidth = 2;
 
-const colors = [
-'#c56cf0',
-'#ffb8b8',
-'#ff3838',
-'#ff9f1a',
-'#ff9f1a',
-'#fff200',
-'#32ff7e',
-'#7efff5',
-'#18dcff',
-'#7d5fff',
-'#4b4b4b',
-];
+// const colors = [
+// '#c56cf0',
+// '#ffb8b8',
+// '#ff3838',
+// '#ff9f1a',
+// '#ff9f1a',
+// '#fff200',
+// '#32ff7e',
+// '#7efff5',
+// '#18dcff',
+// '#7d5fff',
+// '#4b4b4b',
+// ];
 
-const beginPoint = {
-x: Math.random() * CANVAS_SIZE,
-y: Math.random() * CANVAS_SIZE,
-};
+// const beginPoint = {
+// x: Math.random() * CANVAS_SIZE,
+// y: Math.random() * CANVAS_SIZE,
+// };
 
-function onMove({ offsetX, offsetY }) {
-ctx.beginPath();
-ctx.moveTo(beginPoint.x, beginPoint.y);
-ctx.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
+// function onMove({ offsetX, offsetY }) {
+// ctx.beginPath();
+// ctx.moveTo(beginPoint.x, beginPoint.y);
+// ctx.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
 
-ctx.lineTo(offsetX, offsetY);
-ctx.stroke();
-}
+// ctx.lineTo(offsetX, offsetY);
+// ctx.stroke();
+// }
 
-function onClick({ offsetX, offsetY }) {
-beginPoint.x = offsetX;
-beginPoint.y = offsetY;
-}
+// function onClick({ offsetX, offsetY }) {
+// beginPoint.x = offsetX;
+// beginPoint.y = offsetY;
+// }
 
-canvas.addEventListener('mousemove', onMove);
-canvas.addEventListener('click', onClick);
+// canvas.addEventListener('mousemove', onMove);
+// canvas.addEventListener('click', onClick);
+
+19.12.2022.
+
+ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
+
+여기 이 표현식에는 ()를 넣어야 한다. 
+ctx.drawImage =image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT; 
+이런식으로 표현하면 에러가 난다.
