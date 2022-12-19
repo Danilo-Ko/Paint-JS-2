@@ -1,3 +1,4 @@
+const textInput = document.getElementById("text");
 const fileInput = document.getElementById("image-insert");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
@@ -78,6 +79,17 @@ function onFileChange(e) {
         fileInput.value = null;
     };
 }
+function onTextInput(e) {
+    ctx.save();
+    if(text !== null){
+        const text = textInput.value;
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "black"
+        ctx.fillText(text, e.offsetX, e.offsetY);
+        ctx.restore();
+    };
+}
+canvas.addEventListener("dblclick", onTextInput);
 canvas.addEventListener ("mousemove", onMove);
 canvas.addEventListener ("mousedown", startDraw);
 canvas.addEventListener ("click", onFillDraw);
