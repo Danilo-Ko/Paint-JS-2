@@ -1,6 +1,6 @@
 const saveBtn = document.getElementById("save");
 const textInput = document.getElementById("text");
-const fileInput = document.getElementById("image-insert");
+const fileInput = document.getElementById("file");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
 const mode = document.getElementById("mode-change");
