@@ -1,36 +1,43 @@
-const colorPaint = document.getElementById("color");
+const color = document.getElementById("color");
+const lineWidth = document.getElementById("line-size");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
 canvas.height = 800;
 
-ctx.lineWidth = 2;
+ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
 let isPainting = false;
 
-function onMove (event){
 function onMove (e){
     if(isPainting) {
-        ctx.lineTo(event.offsetX, event.offsetY);
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         return;
+    }else {
+        ctx.moveTo(e.offsetX, e.offsetY);
     }
-    ctx.moveTo(event.offsetX, event.offsetY);
-    ctx.moveTo(e.offsetX, e.offsetY);
 }
-function onMouseDown (){
+function startDraw (){
+    ctx.beginPath();
     isPainting = true;
 }
-function onMouseUp (){
+function stopDraw (){
     isPainting = false;
 }
-function onColorPaint (e) {
-       ctx.lineTo(e.offsetX, e.offsetY);
+function lineWidthChange (e) {
+    ctx.lineWidth=e.target.value;
+}
+function onColorPicker (e) {
+    ctx.fillRect=e.target.value;
+    ctx.strokeStyle=e.target.value;
     ctx.fillStyle = color;
 }
 canvas.addEventListener("mousemove", onMove);
-canvas.addEventListener("mousedown", onMouseDown);
-canvas.addEventListener("mouseup", onMouseUp);
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
 
-colorPaint.addEventListener("change", onColorPaint);
+lineWidth.addEventListener("change", lineWidthChange);
+color.addEventListener("change", onColorPicker);
