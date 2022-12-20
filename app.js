@@ -1,121 +1,37 @@
-const saveBtn = document.getElementById("save");
-const textInput = document.getElementById("text");
-const fileInput = document.getElementById("file");
-const eraser = document.getElementById("eraser-mode");
-const reset = document.getElementById("reset-mode");
-const mode = document.getElementById("mode-change");
-const colorOption =Array.from(document.getElementsByClassName("color-option"));
-const colorPicker = document.getElementById("color");
-// const font = document.getElementById("font-size");
-const range = document.getElementById("line-size");
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext ("2d");
+@@ -1,26 +1,33 @@
+const colorPaint = document.getElementById("color");
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
-CANVAS_WIDTH  = 800;
-CANVAS_HEIGHT  = 800;
+canvas.width = 800;
+canvas.height = 800;
 
-canvas.width = CANVAS_WIDTH;
-canvas.height = CANVAS_HEIGHT;
+ctx.lineWidth = 2;
+let isPainting = false;
 
-ctx.lineWidth = range.value;
-ctx.lineCap = "round";
-
-isDrawing = false;
-isFilling = false;
-
-function onMove (e) {
-    if(isDrawing) {
-        ctx.lineTo (e.offsetX, e.offsetY);
+function onMove (event){
+function onMove (e){
+    if(isPainting) {
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
-    } else {
-        ctx.moveTo (e.offsetX, e.offsetY);
+        return;
     }
+    ctx.moveTo(event.offsetX, event.offsetY);
+    ctx.moveTo(e.offsetX, e.offsetY);
 }
-function startDraw (){
-    ctx.beginPath();
-    isDrawing = true;
+function onMouseDown (){
+    isPainting = true;
 }
-function stopDraw (){
-    isDrawing = false;
+function onMouseUp (){
+    isPainting = false;
 }
-function lineWidhtChange (e) {
-    ctx.lineWidth = e.target.value;
+function onColorPaint (e) {
+       ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.fillStyle = color;
 }
-// function fontSizeChange (e) {
-//     ctx.fontSize = e.target.value;
-// }
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", onMouseDown);
+canvas.addEventListener("mouseup", onMouseUp);
 
-function onColorPicker (e) {
-    ctx.strokeStyle = e.target.value;
-    ctx.fillStyle = e.target.value;
-}
-function onColorOption (e) {
-    const colorOption = e.target.dataset.color;
-    ctx.strokeStyle= colorOption;
-    ctx.fillStyle = colorOption;
-    colorPicker.value = colorOption;
-}
-function onModeChange () {
-    if(isFilling) {
-        isFilling = false;
-        mode.innerText = "그리기";
-    }else {
-        isFilling = true;
-        mode.innerText = "채우기";
-    }
-}
-function onFillDraw () {
-    if(isFilling) {
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    }
-}
-function onResetCanvas () {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-}
-function onEraser () {
-    ctx.strokeStyle = "white";
-}
-function onFileChange(e) {
-    const file = e.target.files[0];
-    const url = URL.createObjectURL(file);
-    const image = new Image();
-    image.src = url;
-    image.onload = function () {
-        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        fileInput.value = null;
-    };
-}
-function onTextInput(e) {
-    ctx.save();
-    if(text !== null){
-        const text = textInput.value;
-        ctx.lineWidth = 1;
-        ctx.fillText(text, e.offsetX, e.offsetY);
-        ctx.restore();
-    };
-}
-function onSaveClick () {
-    const url = canvas.toDataURL();
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "myDrawing.png";
-    a.click();
-}
-canvas.addEventListener("dblclick", onTextInput);
-canvas.addEventListener ("mousemove", onMove);
-canvas.addEventListener ("mousedown", startDraw);
-canvas.addEventListener ("click", onFillDraw);
-canvas.addEventListener ("mouseup", stopDraw);
-canvas.addEventListener ("mouseleave", stopDraw);
-
-range.addEventListener ("change", lineWidhtChange);
-// font.addEventListener ("change", fontSizeChange);
-colorPicker.addEventListener ("change", onColorPicker);
-
-colorOption.forEach((color) => color.addEventListener("click", onColorOption));
-mode.addEventListener ("click", onModeChange);
-reset.addEventListener ("click", onResetCanvas);
-eraser.addEventListener ("click", onEraser);
-fileInput.addEventListener ("change", onFileChange);
-saveBtn.addEventListener ("click", onSaveClick);
+colorPaint.addEventListener("change", onColorPaint);
