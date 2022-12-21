@@ -90,10 +90,12 @@ function saveFunction (e) {
     a.click();
 }
 function textInputFunction (e) {
+    ctx.save();
     if (text !== null){
         const text = textInput.value;
         ctx.fillText(text, e.offsetX, e.offsetY);
     };
+    ctx.restore();
 }
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
