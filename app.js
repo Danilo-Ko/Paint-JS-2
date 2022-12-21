@@ -1,3 +1,4 @@
+const fileBtn = document.getElementById("file");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
 const mode = document.getElementById("mode-change");
@@ -64,10 +65,20 @@ function fillCanvas (){
 }
 function resetCanvas () {
     ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, 800, 800);
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 function eraserFunction () {
     ctx.strokeStyle = "white";
+}
+function fileInsert (e) {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = url;
+    image.onload = function () {
+        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        fileBtn.value = null;
+    };
 }
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
@@ -81,4 +92,4 @@ color.addEventListener("change", onColorPicker);
 colorOption.forEach((color) => color.addEventListener("click", colorOptionChange));
 mode.addEventListener("click", modeChange);
 reset.addEventListener("click", resetCanvas);
-eraser.addEventListener("click", eraserFunction);
+fileBtn.addEventListener("change", fileInsert);
