@@ -1,3 +1,5 @@
+const textInput = document.getElementById("text");
+const saveCanvas = document.getElementById("save");
 const fileBtn = document.getElementById("file");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
@@ -80,9 +82,23 @@ function fileInsert (e) {
         fileBtn.value = null;
     };
 }
+function saveFunction (e) {
+    const url =canvas.toDataURL();
+    const a =document.createElement ("a");
+    a.href = url;
+    a.download ="Drawing.png";
+    a.click();
+}
+function textInputFunction (e) {
+    if (text !== null){
+        const text = textInput.value;
+        ctx.fillText(text, e.offsetX, e.offsetY);
+    };
+}
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("click", fillCanvas);
+canvas.addEventListener("dblclick", textInputFunction);
 canvas.addEventListener("mouseup", stopDraw);
 canvas.addEventListener("mouseleave", stopDraw);
 
@@ -93,3 +109,4 @@ colorOption.forEach((color) => color.addEventListener("click", colorOptionChange
 mode.addEventListener("click", modeChange);
 reset.addEventListener("click", resetCanvas);
 fileBtn.addEventListener("change", fileInsert);
+saveCanvas.addEventListener("click", saveFunction);
