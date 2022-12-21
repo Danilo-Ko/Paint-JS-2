@@ -31,8 +31,23 @@
         <input type = "file" accept="image/*" id="file" /> </label> 
         <button id="save"> 그림 저장 </button>
         <input type="text" placeholder = "문자 입력 후 더블클릭" id ="text"/>
+              <select name="font" id="font">  
+              <option value="serif">serif</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Lucida Sans">Lucida Sans</option>
+              <option value="verdana">Verdana</option>
+              <option value="gulim">Gulim</option>
+              <option value="gungseo">Gungseo</option>
+            </select>
+            <input id="font-size" type="number" value="18" min="15" max="100" >
+            <!-- </select> -->
+            <select name="font-type" id="font-type">
+              <option value="normal">normal</option>
+              <option value="bold">bold</option>
+              <option value="italic">Italic</option>
+
+            </select>
     </div>
-    <!-- <input type="range" id ="font-size" min="1" max = "20" step = "1" value="5"/> -->
     <script src="app.js"></script>
     <!-- <script src="Note.js"></script> -->
 </body>
