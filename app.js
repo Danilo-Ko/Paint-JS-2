@@ -1,9 +1,5 @@
-const fontType = document.getElementById("font-type");
-const font = document.getElementById("font");
-const fontSize = document.getElementById("font-size");
-const textInput = document.getElementById("text");
-const saveCanvas = document.getElementById("save");
-const fileBtn = document.getElementById("file");
+
+const file = document.getElementById("file");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
 const mode = document.getElementById("mode-change");
@@ -76,36 +72,19 @@ function eraserFunction () {
     ctx.strokeStyle = "white";
 }
 function fileInsert (e) {
+    // console.dir(e.target);
     const file = e.target.files[0];
     const url = URL.createObjectURL(file);
     const image = new Image();
     image.src = url;
-    image.onload = function () {
-        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        fileBtn.value = null;
+    image.onload = function() {
+        ctx.drawImage (image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        file.value = null;
     };
-}
-function saveFunction (e) {
-    const url =canvas.toDataURL();
-    const a =document.createElement ("a");
-    a.href = url;
-    a.download ="Drawing.png";
-    a.click();
-}
-function textInputFunction (e) {
-    const text = textInput.value;
-    ctx.save();
-    if (text !== null){
-        ctx.lineWidth = 1;
-        ctx.font = `${fontType.value} ${fontSize.value}px ${font.value}`;
-        ctx.fillText(text, e.offsetX, e.offsetY);
-    };
-    ctx.restore();
 }
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("click", fillCanvas);
-canvas.addEventListener("dblclick", textInputFunction);
 canvas.addEventListener("mouseup", stopDraw);
 canvas.addEventListener("mouseleave", stopDraw);
 
@@ -115,5 +94,5 @@ color.addEventListener("change", onColorPicker);
 colorOption.forEach((color) => color.addEventListener("click", colorOptionChange));
 mode.addEventListener("click", modeChange);
 reset.addEventListener("click", resetCanvas);
-fileBtn.addEventListener("change", fileInsert);
-saveCanvas.addEventListener("click", saveFunction);
+eraser.addEventListener("click", eraserFunction);
+file.addEventListener("change", fileInsert);
