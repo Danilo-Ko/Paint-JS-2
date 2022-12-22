@@ -9,10 +9,8 @@
 </head>
 <body>
     
-    <canvas id="canvas"></canvas>
-    <input type="range" id ="line-size" min="1" max = "20" step = "1" value="10"/>
+    <div class="color-group">
     <input type="color" id="color" />
-    <div>
     <div class = "color-option" style="background-color: #FFC0CB;" data-color = "#FFC0CB"></div>
 	<div class = "color-option" style="background-color: #C71585;" data-color = "#C71585"></div>
     <div class = "color-option" style="background-color: #D8BFD8;" data-color = "#D8BFD8"></div>
@@ -22,8 +20,11 @@
     <div class = "color-option" style="background-color: #228B22;" data-color = "#228B22"></div>
 	<div class = "color-option" style="background-color: #191970;" data-color = "#191970"></div>
 	<div class = "color-option" style="background-color: #000000;" data-color = "#000000"></div>
+    
     </div>
-
+    <canvas id="canvas"></canvas>
+    <div id = "buttons">
+    <input type="range" id ="line-size" min="1" max = "20" step = "1" value="10"/>
     <button id = "mode-change"> 그리기 </button>
     <button id = "reset-mode"> 초기화 </button>
     <button id = "eraser-mode"> 지우개 </button>
@@ -41,6 +42,7 @@
         <option value="italic">Italic</option>
     </select>
     <input type="text" placeholder="텍스트 작성 후 더블 클릭" id ="text"/>
+</div>
     <script src="app.js"></script>
     <!-- <script src="Note.js"></script> -->
 </body>

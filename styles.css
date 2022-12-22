@@ -9,9 +9,22 @@ body {
     justify-content: center;
     align-items:center;
 }
-.color-option {
+div.color-option {
     width: 50px;
     height: 50px;
-    border: 2px, solid blue;
     border-radius:25px;
+    border: 2px, solid white;
+}
+.color-group {
+    display: grid;
+    row-gap: 20px;
+    margin:20px;
+}
+#buttons {
+    display: grid;
+    margin: 20px;
+    text-align:center;
+    justify-content: center;
+    align-items:center;
+    row-gap: 20px;
 }
