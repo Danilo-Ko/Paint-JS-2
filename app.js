@@ -1,4 +1,5 @@
-
+const textInput = document.getElementById("text");
+const savePicture = document.getElementById("save");
 const file = document.getElementById("file");
 const eraser = document.getElementById("eraser-mode");
 const reset = document.getElementById("reset-mode");
@@ -82,9 +83,22 @@ function fileInsert (e) {
         file.value = null;
     };
 }
+function savePictureFunc (e) {
+    // console.log(e);
+    const url = canvas.toDataURL();
+    const a = document.createComment("a");
+    a.src = url;
+    // a.download = 
+}
+function textInputFunc (e){
+    const text = textInput.value;
+    ctx.lineWidth =1;
+    ctx.fillText(text, e.offsetX, e.offsetY);
+}
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("click", fillCanvas);
+canvas.addEventListener("dblclick", textInputFunc);
 canvas.addEventListener("mouseup", stopDraw);
 canvas.addEventListener("mouseleave", stopDraw);
 
@@ -96,3 +110,4 @@ mode.addEventListener("click", modeChange);
 reset.addEventListener("click", resetCanvas);
 eraser.addEventListener("click", eraserFunction);
 file.addEventListener("change", fileInsert);
+savePicture.addEventListener("click", savePictureFunc);
