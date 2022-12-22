@@ -1,3 +1,6 @@
+const font = document.getElementById("font");
+const fontSize = document.getElementById("font-size");
+const fontType = document.getElementById("font-type");
 const textInput = document.getElementById("text");
 const savePicture = document.getElementById("save");
 const file = document.getElementById("file");
@@ -83,18 +86,24 @@ function fileInsert (e) {
         file.value = null;
     };
 }
-function savePictureFunc (e) {
-    // console.log(e);
+function savePictureFunc () {
     const url = canvas.toDataURL();
-    const a = document.createComment("a");
-    a.src = url;
-    // a.download = 
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "picture.png";
+    a.click();
 }
 function textInputFunc (e){
     const text = textInput.value;
-    ctx.lineWidth =1;
-    ctx.fillText(text, e.offsetX, e.offsetY);
+    ctx.save();
+    if(text !== null){
+        ctx.lineWidth =1;
+        ctx.font =`${fontSize.value}px ${font.value}`;
+        ctx.fillText(text, e.offsetX, e.offsetY);
+    };
+    ctx.restore();
 }
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("click", fillCanvas);
