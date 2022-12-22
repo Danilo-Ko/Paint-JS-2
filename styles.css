@@ -72,3 +72,12 @@ input#text {
     color: black;
     border: 1px solid lightblue;
 }
+.font-group {
+    text-align: center; 
+    font-size: 20px;
+    border-radius:10px;
+    padding: 7px;
+    color: white;
+    cursor:pointer;
+    background-color: rgb(112, 112, 238);
+}

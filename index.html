@@ -30,7 +30,18 @@
         이미지 추가
         <input type = "file" accept="image/*" id="file" /> </label> 
         <button id="save"> 그림 저장 </button>
+        <select name="font" id="font" class="font-group">
+            <option value="serif">Serif</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select>
+        <input type="number" id ="font-size" min="10" max = "300" value="50" class="font-group" />
+        <select name="font-type" id="font-type" class="font-group">
+            <option value = "normal">Normal</option>
+            <option value = "bold">Bold</option>
+        </select>
+    
     <input type="text" placeholder = "문자 입력 후 더블클릭" id ="text"/>
+
     </div>
     <script src="app.js"></script>
     <!-- <script src="Note.js"></script> -->

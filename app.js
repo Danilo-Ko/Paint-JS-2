@@ -1,3 +1,6 @@
+const fontType = document.getElementById("font-type");
+const font = document.getElementById("font");
+const fontSize = document.getElementById("font-size");
 const textInput = document.getElementById("text");
 const saveCanvas = document.getElementById("save");
 const fileBtn = document.getElementById("file");
@@ -90,9 +93,11 @@ function saveFunction (e) {
     a.click();
 }
 function textInputFunction (e) {
+    const text = textInput.value;
     ctx.save();
     if (text !== null){
-        const text = textInput.value;
+        ctx.lineWidth = 1;
+        ctx.font = `${fontType.value} ${fontSize.value}px ${font.value}`;
         ctx.fillText(text, e.offsetX, e.offsetY);
     };
     ctx.restore();
