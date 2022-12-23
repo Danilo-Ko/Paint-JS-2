@@ -115,7 +115,7 @@ function textInputFunc (e){
 }
 function undoFunc(){
     if(index <=0){
-        clear_canvas();
+        resetCanvas ();
     }else{
         index -= 1;
         restore_array.pop();
