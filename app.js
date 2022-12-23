@@ -34,11 +34,11 @@ function onMove (e){
     }
 }
 function startDraw (){
-    ctx.beginPath();
     isPainting = true;
 }
 function stopDraw (){
     isPainting = false;
+    ctx.beginPath();
 }
 function lineWidthChange (e) {
     ctx.lineWidth=e.target.value;

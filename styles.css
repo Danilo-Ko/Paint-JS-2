@@ -51,7 +51,7 @@ button, label, select {
     cursor: pointer;
     border-radius: 10px;
 }
-.font-size-c{
+#font-size{
     all:unset;
     padding: 10px 0px;
     text-align: center;
@@ -59,11 +59,16 @@ button, label, select {
     color:white;
     font-weight: 700;
     font-size: 20px;
-    cursor: pointer;
     border-radius: 10px;
 }
 button:hover{
-    background-color: blue;
+    background-color: blueviolet;
+}
+.hoverBtn:hover {
+    background-color: blueviolet;
+}
+#font-size:hover{
+    background-color: blueviolet;
 }
 input#file {
     display:none;
