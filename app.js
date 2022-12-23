@@ -69,8 +69,10 @@ function fillCanvas (){
     }
 }
 function resetCanvas () {
+    ctx.save();
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.restore();
 }
 function eraserFunction () {
     ctx.strokeStyle = "white";
