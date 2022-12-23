@@ -100,6 +100,7 @@ function textInputFunc (e){
         ctx.lineWidth =1;
         ctx.font =`${fontType.value} ${fontSize.value}px ${font.value}`;
         ctx.fillText(text, e.offsetX, e.offsetY);
+        textInput.value = null;
     };
     ctx.restore();
 }
