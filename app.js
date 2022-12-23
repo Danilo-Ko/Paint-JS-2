@@ -98,7 +98,7 @@ function textInputFunc (e){
     ctx.save();
     if(text !== null){
         ctx.lineWidth =1;
-        ctx.font =`${fontSize.value}px ${font.value}`;
+        ctx.font =`${fontType.value} ${fontSize.value}px ${font.value}`;
         ctx.fillText(text, e.offsetX, e.offsetY);
     };
     ctx.restore();
