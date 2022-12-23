@@ -1,3 +1,4 @@
+const undoBtn = document.getElementById("undo");
 const font = document.getElementById("font");
 const fontSize = document.getElementById("font-size");
 const fontType = document.getElementById("font-type");
@@ -23,6 +24,8 @@ ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
+let restore_array =[];
+let index = -1;
 
 function onMove (e){
     if(isPainting) {
@@ -32,6 +35,10 @@ function onMove (e){
     }else {
         ctx.moveTo(e.offsetX, e.offsetY);
     }
+    if(e.type != 'mouseleave'){
+        restore_array.push(ctt.getImageData(0,0,CANVAS_WIDTH, CANVAS_HEIGHT));
+        index += 1;
+        }
 }
 function startDraw (){
     isPainting = true;
@@ -106,7 +113,15 @@ function textInputFunc (e){
     };
     ctx.restore();
 }
-
+function undoFunc(){
+    if(index <=0){
+        clear_canvas();
+    }else{
+        index -= 1;
+        restore_array.pop();
+        cxt.putImageData(restore_array[index],0,0);
+    }
+}
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("click", fillCanvas);
@@ -123,3 +138,4 @@ reset.addEventListener("click", resetCanvas);
 eraser.addEventListener("click", eraserFunction);
 file.addEventListener("change", fileInsert);
 savePicture.addEventListener("click", savePictureFunc);
+undoBtn.addEventListener("click", undoFunc);
